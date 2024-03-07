@@ -13,11 +13,12 @@ void Books::AddBook() {
   char status;
   cout << "ADD BOOK INFO" << endl;
   cout << "Please enter the Book Title:" << endl;
-  getline(cin, bookTitle);
   cin.ignore();
+  getline(cin, bookTitle);
+  // cin.ignore();
   cout << "Please enter the Book Author:" << endl;
   getline(cin, authorName);
-  cin.ignore();
+  // cin.ignore();
   cout << "Please enter the Book ISBN:" << endl;
   cin >> bookISBN;
   cout << "Please enter the Book Library ID:" << endl;
@@ -27,23 +28,24 @@ void Books::AddBook() {
   cout << "Please enter the Book Status:\n 'I' - In \n 'O' - Out\n 'L' - "
           "Lost\n 'R' - Repair"
        << endl;
+  cin >> status;
 
   Book newBook =
       Book(bookTitle, authorName, bookISBN, bookLibraryID, cost, status);
 
   booksList.push_back(newBook);
+  cout << "Book added successfully." << endl;
 }
 
 void Books::DeleteBook(int BookID) {
   cout << "DELETE BOOK INFO" << endl;
-  cout << "Please enter the Book ID:" << endl;
-  cin >> BookID;
   for (int i = 0; i < booksList.size(); i++) {
     if (booksList.at(i).GetLibraryID() == BookID) {
       booksList.erase(booksList.begin() + i);
       cout << "Book deleted." << endl;
     } else {
       cout << "Book not found. Please try again." << endl;
+      cout << endl;
     }
   }
 }
@@ -80,42 +82,42 @@ void Books::EditBookDetails(Book &book) {
   cin >> choice;
 
   switch (choice) {
-  case 1: {
+  case '1': {
     string newTitle;
     cout << "Enter new Title:" << endl;
     getline(cin, newTitle);
     book.SetTitle(newTitle);
     break;
   }
-  case 2: {
+  case '2': {
     string newAuthor;
     cout << "Enter new Author:" << endl;
     getline(cin, newAuthor);
     book.SetAuthor(newAuthor);
     break;
   }
-  case 3: {
+  case '3': {
     int newISBN;
     cout << "Enter new ISBN:" << endl;
     cin >> newISBN;
     book.SetISBN(newISBN);
     break;
   }
-  case 4: {
+  case '4': {
     int newLibraryID;
     cout << "Enter new Library ID:" << endl;
     cin >> newLibraryID;
     book.SetLibraryID(newLibraryID);
     break;
   }
-  case 5: {
+  case '5': {
     double newCost;
     cout << "Enter new Cost:" << endl;
     cin >> newCost;
     book.SetCost(newCost);
     break;
   }
-  case 6: {
+  case '6': {
     char newStatus;
     cout << "Enter new Status:" << endl;
     cin >> newStatus;
