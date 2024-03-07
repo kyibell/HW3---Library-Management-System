@@ -57,14 +57,52 @@ void PrintBookMenu() {
 }
 
 void PrintPatronMenu() {
-  cout << "---------PATRON MANAGEMENT---------" << endl;
-  cout << "What would you like to do?:" << endl;
-  cout << "1. Add Patron" << endl;
-  cout << "2. Delete Patron" << endl;
-  cout << "3. Edit Patron" << endl;
-  cout << "4. Print All Patrons" << endl;
-  cout << "5. Print Specific Patron" << endl;
-  cout << "6. Return to Main Menu" << endl;
+  char choice;
+  int PatronID;
+  do {
+    cout << "---------PATRON MANAGEMENT---------" << endl;
+    cout << "What would you like to do?:" << endl;
+    cout << "1. Add Patron" << endl;
+    cout << "2. Delete Patron" << endl;
+    cout << "3. Edit Patron" << endl;
+    cout << "4. Print All Patrons" << endl;
+    cout << "5. Print Specific Patron" << endl;
+    cout << "6. Pay Fines" << endl;
+    cout << "7. Return to Main Menu" << endl;
+
+    cin >> choice;
+    switch (choice) {
+    case '1':
+      allPatrons.AddPatron();
+      break;
+    case '2':
+      cout << "Please enter the Patron ID that you want to delete:" << endl;
+      cin >> PatronID;
+      allPatrons.DeletePatron(PatronID);
+      break;
+    case '3':
+      cout << "Please enter the Patron ID that you want to edit:" << endl;
+      cin >> PatronID;
+      allPatrons.EditPatron(PatronID);
+      break;
+    case '4':
+      allPatrons.PrintPatrons();
+      break;
+    case '5':
+      cout << "Please enter the Patron ID that you want to print:" << endl;
+      cin >> PatronID;
+      allPatrons.PrintSpecificPatron(PatronID);
+      break;
+    case '6':
+      cout << "Please enter the Patron ID that you want to pay fines:" << endl;
+      cin >> PatronID;
+      allPatrons.PayFines(PatronID);
+    case '7':
+      break;
+    default:
+      cout << "Invalid opinon. Please try again." << endl;
+    }
+  } while (choice != '7');
 }
 
 void PrintLoanMenu() {
@@ -95,6 +133,8 @@ void PrintMainMenu() {
       break;
     case '3':
       PrintLoanMenu();
+      break;
+    case '4':
       break;
     default:
       cout << "Invalid choice. Please try again." << endl;

@@ -12,8 +12,8 @@ void Patrons::AddPatron() {
   double fines;
   cout << "ADD PATRON INFO:" << endl;
   cout << "Please enter the Patron Name:" << endl;
-  getline(cin, patronName);
   cin.ignore();
+  getline(cin, patronName);
   cout << "Please enter the Patron ID:" << endl;
   cin >> PatronID;
   cout << "Please enter the Patron Fine Balance:" << endl;
@@ -34,6 +34,7 @@ void Patrons::DeletePatron(int PatronID) {
       cout << "Patron not found. Pleae try again." << endl;
     }
   }
+  cout << endl;
 }
 
 void Patrons::EditPatron(int PatronID) {
@@ -48,6 +49,7 @@ void Patrons::EditPatron(int PatronID) {
       cout << "Patron not found. Please try again." << endl;
     }
   }
+  cout << endl;
 }
 
 void Patrons::EditPatronDetails(Patron &patron) {
@@ -59,25 +61,29 @@ void Patrons::EditPatronDetails(Patron &patron) {
   cin >> choice;
 
   switch (choice) {
-  case 1: {
+  case '1': {
     string newName;
     cout << "Enter new Name:" << endl;
+    cin.ignore();
     getline(cin, newName);
     patron.SetName(newName);
+    cout << "Patron Name changed successfully." << endl;
     break;
   }
-  case 2: {
+  case '2': {
     double newFineBalance;
     cout << "Enter the new Fine Balance:" << endl;
     cin >> newFineBalance;
     patron.SetFineBalance(newFineBalance);
+    cout << "Fine Balance changed successfully." << endl;
     break;
   }
-  case 3: {
+  case '3': {
     int newOutBooks;
     cout << "Enter the new Number of Out Books:" << endl;
     cin >> newOutBooks;
     patron.SetCheckedOutBooks(newOutBooks);
+    cout << "Number of Out Books changed successfully." << endl;
     break;
   }
   }
@@ -99,16 +105,21 @@ Patron Patrons::FindPatron(int PatronID) {
 void Patrons::PrintPatrons() {
   cout << "PATRONS:" << endl;
   for (int i = 0; i < patronsList.size(); i++) {
-    cout << "Name: " << patronsList.at(i).GetName() << endl;
+    cout << "Name: " << patronsList.at(i).GetName()
+         << " ID: " << patronsList.at(i).GetIDNum()
+         << " Out Books: " << patronsList.at(i).GetOutBooks()
+         << " Fine Balance: " << patronsList.at(i).GetFineBalance() << endl;
   }
+  cout << endl;
 }
 
 void Patrons::PrintSpecificPatron(int PatronID) {
   Patron foundPatron = FindPatron(PatronID);
-  if (foundPatron.GetName() != "") {
+  if (foundPatron.GetIDNum() != 0) {
     cout << "PATRON DETAILS:" << endl;
     foundPatron.PrintPatron(foundPatron);
   }
+  cout << endl;
 }
 
 void Patrons::PayFines(int PatronID) {

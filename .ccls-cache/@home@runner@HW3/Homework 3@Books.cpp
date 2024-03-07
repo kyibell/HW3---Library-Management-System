@@ -15,10 +15,8 @@ void Books::AddBook() {
   cout << "Please enter the Book Title:" << endl;
   cin.ignore();
   getline(cin, bookTitle);
-  // cin.ignore();
   cout << "Please enter the Book Author:" << endl;
   getline(cin, authorName);
-  // cin.ignore();
   cout << "Please enter the Book ISBN:" << endl;
   cin >> bookISBN;
   cout << "Please enter the Book Library ID:" << endl;
@@ -54,9 +52,6 @@ void Books::EditBook(int BookID) {
   bool found = false;
   int i;
   cout << "EDIT BOOK INFO" << endl;
-  cout << "Please enter the Book ID:" << endl;
-  cin >> BookID;
-
   for (i = 0; i < booksList.size(); i++) {
     if (booksList.at(i).GetLibraryID() == BookID) {
       found = true;
@@ -85,6 +80,7 @@ void Books::EditBookDetails(Book &book) {
   case '1': {
     string newTitle;
     cout << "Enter new Title:" << endl;
+    cin.ignore();
     getline(cin, newTitle);
     book.SetTitle(newTitle);
     break;
@@ -92,6 +88,7 @@ void Books::EditBookDetails(Book &book) {
   case '2': {
     string newAuthor;
     cout << "Enter new Author:" << endl;
+    cin.ignore();
     getline(cin, newAuthor);
     book.SetAuthor(newAuthor);
     break;
