@@ -13,7 +13,7 @@ public:
   void DeleteBook(int BookID);
   void EditBook(int BookID);
   void EditBookDetails(Book& book);
-  Book FindBook(int BookID);
+  Book* FindBook(int BookID);
   void PrintAllBooks(); 
   void PrintSpecificBook(int BookID);
 

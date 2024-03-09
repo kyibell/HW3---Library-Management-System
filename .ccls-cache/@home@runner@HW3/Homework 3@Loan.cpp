@@ -36,3 +36,12 @@ int Loan::GetBookID() const { return BookID; }
 int Loan::GetPatronID() const { return PatronID; }
 time_t Loan::GetDueDate() const { return dueDate; }
 char Loan::GetLoanStatus() const { return currentStatus; }
+
+//Print Loan
+void Loan::PrintLoan(Loan loan) {
+  cout << "Loan ID: " << loan.GetLoanID() << endl;
+  cout << "Book ID: " << loan.GetBookID() << endl;
+  cout << "Patron ID: " << loan.GetPatronID() << endl;
+  cout << "Due Date: " << loan.GetDueDate() << endl;
+  cout << "Loan Status: " << loan.GetLoanStatus() << endl;
+}

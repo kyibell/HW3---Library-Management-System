@@ -89,17 +89,17 @@ void Patrons::EditPatronDetails(Patron &patron) {
   }
 }
 
-Patron Patrons::FindPatron(int PatronID) {
+Patron* Patrons::FindPatron(int PatronID) {
   Patron foundPatron;
   for (int i = 0; i < patronsList.size(); i++) {
     if (patronsList.at(i).GetIDNum() == PatronID) {
       foundPatron = patronsList.at(i);
+      return &patronsList.at(i);
       break;
-    } else {
-      cout << "Patron not found. Please try again." << endl;
     }
   }
-  return foundPatron;
+      cout << "Patron not found. Please try again." << endl;
+      return nullptr;
 }
 
 void Patrons::PrintPatrons() {
@@ -114,10 +114,10 @@ void Patrons::PrintPatrons() {
 }
 
 void Patrons::PrintSpecificPatron(int PatronID) {
-  Patron foundPatron = FindPatron(PatronID);
-  if (foundPatron.GetIDNum() != 0) {
+  Patron* foundPatron = FindPatron(PatronID);
+  if (foundPatron->GetIDNum() != 0) {
     cout << "PATRON DETAILS:" << endl;
-    foundPatron.PrintPatron(foundPatron);
+    foundPatron->PrintPatron(*foundPatron);
   }
   cout << endl;
 }

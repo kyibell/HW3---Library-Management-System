@@ -22,6 +22,7 @@ public:
   int GetPatronID() const;
   time_t GetDueDate() const;
   char GetLoanStatus() const;
+  void PrintLoan(Loan loan);
 
 private:
   int LoanID;

@@ -11,7 +11,7 @@ public:
   void DeletePatron(int PatronID);
   void EditPatron(int PatronID);
   void EditPatronDetails(Patron& patron);
-  Patron FindPatron(int PatronID);
+  Patron* FindPatron(int PatronID);
   void PrintPatrons();
   void PrintSpecificPatron(int PatronID);
   void PayFines(int PatronID);

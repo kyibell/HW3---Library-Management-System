@@ -127,19 +127,18 @@ void Books::EditBookDetails(Book &book) {
   }
 }
 
-Book Books::FindBook(int BookID) {
+Book* Books::FindBook(int BookID) {
   Book foundBook;
   for (int i = 0; i < booksList.size(); i++) {
     if (booksList.at(i).GetLibraryID() == BookID) {
       foundBook = booksList.at(i);
+      return &booksList.at(i);
       break;
-    } else {
-      cout << "Book not found. Please try again." << endl;
     }
   }
-  return foundBook;
+  cout << "Book not found. Please try again." << endl;
+  return nullptr;
 }
-
 void Books::PrintAllBooks() {
   cout << "BOOK COLLECTION:" << endl;
   for (int i = 0; i < booksList.size(); i++) {
@@ -148,9 +147,9 @@ void Books::PrintAllBooks() {
 }
 
 void Books::PrintSpecificBook(int BookID) {
-  Book foundBook = FindBook(BookID);
-  if (foundBook.GetTitle() != "") {
+  Book *foundBook = FindBook(BookID);
+  if (foundBook->GetTitle() != "") {
     cout << "BOOK DETAILS:" << endl;
-    foundBook.PrintBook(foundBook);
+    foundBook->PrintBook(*foundBook);
   }
 }

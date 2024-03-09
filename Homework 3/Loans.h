@@ -11,15 +11,14 @@
 
 class Loans {
 public:
-  void CheckOutBook(Patron patron, Book book);
-  void CalculateFines(int patronID, time_t currentDate);
-  void CheckInBook(int LoanID, Book book, Patron patron);
+  void CheckOutBook(int LoanID, Patrons &allpatrons, Books &allBooks);
+  void CheckDueDates(Patrons allPatrons);
+  void CheckInBook(int LoanID, Patrons &allpatrons, Books &allBooks);
   void ListOverdueBooks();
   void ListBooksForPatron(int PatronID);
-  void UpdateLoanStatus(Loan loan);
-  void RecheckBook(Loan loan);
-  void EditLoan(Loan loan);
-  void ReportLost(Loan loan);
+  void UpdateLoanStatus(int LoanID);
+  void RecheckBook(int LoanID, Patrons &allPatrons, Books &allBooks);
+  void ReportLost(int LoanID, Patrons &allPatrons, Books &allBooks);
 
 private:
   vector<Loan> LoansList;

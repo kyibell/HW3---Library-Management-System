@@ -106,12 +106,78 @@ void PrintPatronMenu() {
 }
 
 void PrintLoanMenu() {
-  cout << "---------LOAN MANAGEMENT---------" << endl;
-  cout << "What would you like to do?:" << endl;
-  cout << "1. Check Out Book" << endl;
-  cout << "2. Check In Book" << endl;
-  cout << "3. Calculate Fines" << endl;
-  cout << "4. Return to Main Menu" << endl;
+  char choice;
+  do {
+    cout << "---------LOAN MANAGEMENT---------" << endl;
+    cout << "What would you like to do?:" << endl;
+    cout << "1. Check Out Book" << endl;
+    cout << "2. Check In Book" << endl;
+    cout << "3. Check Due Dates" << endl;
+    cout << "4. List Overdue Books" << endl;
+    cout << "5. List Books for Patron" << endl;
+    cout << "6. Update Loan Status" << endl;
+    cout << "7. Recheck Book" << endl;
+    cout << "8. Report Lost Book" << endl;
+    cout << "9. Return to Main Menu" << endl;
+    
+    cin >> choice;
+    cin.ignore();
+    
+    switch (choice) {
+    case '1':
+      int LoanID;
+      cout << "Check Out Book" << endl;
+      cout << "Please enter LoanID:" << endl;
+      cin >> LoanID;
+      allLoans.CheckOutBook(LoanID, allPatrons, allBooks);
+      break;
+    case '2':
+      cout << "Check In Book" << endl;
+      cout << "Please enter LoanID:" << endl;
+      cin >> LoanID;
+      allLoans.CheckInBook(LoanID, allPatrons, allBooks);
+
+      break;
+    case '3':
+      cout << "Check Due Dates" << endl;
+      allLoans.CheckDueDates(allPatrons);
+      cout << "Due Dates Updated and Fines updated Sucessfully." << endl;
+      break;
+    case '4':
+      cout << "List Overdue Books" << endl;
+      allLoans.ListOverdueBooks();
+      break;
+    case '5':
+      cout << "List Books for Patron" << endl;
+      int PatronID;
+      cout << "Please enter Patron ID:" << endl;
+      cin >> PatronID;
+      allLoans.ListBooksForPatron(PatronID);
+      break;
+    case '6':
+      cout << "Update Loan Status" << endl;
+      cout << "Please enter LoanID:" << endl;
+      cin >> LoanID;
+      allLoans.UpdateLoanStatus(LoanID);
+      break;
+    case '7':
+      cout << "Recheck Book" << endl;
+      cout << "Please enter LoanID:" << endl;
+      cin >> LoanID;
+      allLoans.RecheckBook(LoanID, allPatrons, allBooks);
+      break;
+    case '8':
+      cout << "Report Lost Book" << endl;
+      cout << "Please enter LoanID:" << endl;
+      cin >> LoanID;
+      allLoans.ReportLost(LoanID, allPatrons, allBooks);
+      break;
+    case '9':
+      break;
+    default:
+      cout << "Invalid opinon. Please try again." << endl;
+    }
+  } while (choice != '9');
 }
 
 void PrintMainMenu() {
