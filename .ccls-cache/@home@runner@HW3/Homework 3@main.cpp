@@ -14,7 +14,7 @@ Patrons allPatrons;
 Books allBooks;
 Loans allLoans;
 
-void PrintBookMenu() {
+void PrintBookMenu() { //Book Menu
   char choice;
   do {
     cout << "---------BOOK MANAGEMENT---------" << endl;
@@ -56,7 +56,7 @@ void PrintBookMenu() {
   } while (choice != '6');
 }
 
-void PrintPatronMenu() {
+void PrintPatronMenu() { //Patron Menu
   char choice;
   int PatronID;
   do {
@@ -105,7 +105,7 @@ void PrintPatronMenu() {
   } while (choice != '7');
 }
 
-void PrintLoanMenu() {
+void PrintLoanMenu() { //Loans Menu
   char choice;
   do {
     cout << "---------LOAN MANAGEMENT---------" << endl;
@@ -180,7 +180,7 @@ void PrintLoanMenu() {
   } while (choice != '9');
 }
 
-void PrintMainMenu() {
+void PrintMainMenu() { //Main Menu
   char choice;
   do {
     cout << "---------LIBRARY MANAGEMENT SYSTEM---------" << endl;

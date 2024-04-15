@@ -8,7 +8,7 @@ using namespace std;
 
 void Books::AddBook() {
   string authorName, bookTitle;
-  int bookISBN, bookLibraryID;
+  int bookISBN, bookLibraryID; 
   double cost;
   char status;
   cout << "ADD BOOK INFO" << endl;
@@ -29,20 +29,20 @@ void Books::AddBook() {
   cin >> status;
 
   Book newBook =
-      Book(bookTitle, authorName, bookISBN, bookLibraryID, cost, status);
+      Book(bookTitle, authorName, bookISBN, bookLibraryID, cost, status); //Create new Book Object
 
-  booksList.push_back(newBook);
+  booksList.push_back(newBook); // Add Book to BooksList vector
   cout << "Book added successfully." << endl;
 }
 
 void Books::DeleteBook(int BookID) {
   cout << "DELETE BOOK INFO" << endl;
   for (int i = 0; i < booksList.size(); i++) {
-    if (booksList.at(i).GetLibraryID() == BookID) {
-      booksList.erase(booksList.begin() + i);
+    if (booksList.at(i).GetLibraryID() == BookID) { //Loop through BooksList vector to find BookID
+      booksList.erase(booksList.begin() + i); //Erase Book from BooksList vector
       cout << "Book deleted." << endl;
-    } else {
-      cout << "Book not found. Please try again." << endl;
+    } else { //If book is not found
+      cout << "Book not found. Please try again." << endl; 
       cout << endl;
     }
   }
@@ -53,9 +53,9 @@ void Books::EditBook(int BookID) {
   int i;
   cout << "EDIT BOOK INFO" << endl;
   for (i = 0; i < booksList.size(); i++) {
-    if (booksList.at(i).GetLibraryID() == BookID) {
+    if (booksList.at(i).GetLibraryID() == BookID) { //Loop through BooksList vector to find BookID
       found = true;
-      EditBookDetails(booksList.at(i));
+      EditBookDetails(booksList.at(i)); //Prompt Editing Menu
       break;
     }
   }
@@ -64,7 +64,7 @@ void Books::EditBook(int BookID) {
   }
 }
 
-void Books::EditBookDetails(Book &book) {
+void Books::EditBookDetails(Book &book) { //Edit Book Details Menu
   char choice;
 
   cout << "Select what you would like to edit:" << endl;

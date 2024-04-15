@@ -1,10 +1,11 @@
 #ifndef BOOK_H
 #define BOOK_H
 
+#include "LibraryItem.h"
 #include <string>
 using namespace std;
 
-class Book {
+class Book : public LibraryItem  {
     public:
 
     Book();
