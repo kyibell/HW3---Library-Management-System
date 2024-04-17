@@ -1,11 +1,3 @@
-#include <iostream>
-#include <string>
-#include <vector>
-using namespace std;
-
-#include "Book.h"
-#include "Books.h"
-
 void Books::AddBook() {
   string authorName, bookTitle;
   int bookISBN, bookLibraryID; 

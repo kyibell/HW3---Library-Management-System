@@ -5,20 +5,24 @@
 #include <vector>
 using namespace std;
 
+#include "LibraryItem.h"
 #include "Book.h"
+#include "DVD.h"
+#include "AudioCD.h"
 
-class Books {
+class ItemCollection {
 public:
-  void AddBook(); 
-  void DeleteBook(int BookID);
-  void EditBook(int BookID);
-  void EditBookDetails(Book& book);
-  Book* FindBook(int BookID);
-  void PrintAllBooks(); 
-  void PrintSpecificBook(int BookID);
+  void AddItem(); 
+  void DeleteItem(int itemID);
+  void EditItem(int itemID);
+  void EditItemDetails(LibraryItem& item);
+  Book* FindItem(int itemID);
+  void PrintAllItems(); 
+  void PrintSpecificItem(int itemID);
 
 private:
-  vector<Book> booksList;
+  vector<LibraryItem> itemList;
+
 };
 
 #endif

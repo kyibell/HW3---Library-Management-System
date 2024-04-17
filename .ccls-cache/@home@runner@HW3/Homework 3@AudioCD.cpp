@@ -37,7 +37,7 @@ string AudioCD::GetReleaseDate() const { return releaseDate; }
 string AudioCD::GetGenre() const { return genre; }
 
 //Print AudioCD
-void AudioCD::PrintInfo() {
+void AudioCD::PrintInfo() const {
   cout << "Artist: " << artist << endl;
   cout << "Title: " << title << endl;
   cout << "Number of Tracks:" << numTracks << endl;

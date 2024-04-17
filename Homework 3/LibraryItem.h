@@ -28,6 +28,8 @@ public:
 //Print Info function
 virtual void PrintInfo() const = 0;
 
+//Virtual Destructor
+//virtual ~LibraryItem() {}
 
 };
 

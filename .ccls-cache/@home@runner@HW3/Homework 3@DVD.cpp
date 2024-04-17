@@ -37,7 +37,7 @@ string DVD::GetStudio() const { return studio; }
 string DVD::GetReleaseDate() const { return releaseDate; }
 
 //Print DVD
-void DVD::PrintInfo() {
+void DVD::PrintInfo() const {
   cout << "Title: " << title << endl;
   cout << "Category: " << category << endl;
   cout << "Runtime: " << runtime << endl;
