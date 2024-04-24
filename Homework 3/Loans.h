@@ -4,21 +4,21 @@
 #include "Loan.h"
 #include "Patron.h"
 #include "Patrons.h"
-#include "Book.h"
-#include "Books.h"
+#include "LibraryItem.h"
+#include "ItemCollection.h"
 #include <string>
 #include <vector>
 
 class Loans {
 public:
-  void CheckOutBook(int LoanID, Patrons &allpatrons, Books &allBooks);
+  void CheckOutBook(int LoanID, Patrons &allpatrons, ItemCollection &allItems);
   void CheckDueDates(Patrons allPatrons);
-  void CheckInBook(int LoanID, Patrons &allpatrons, Books &allBooks);
+  void CheckInBook(int LoanID, Patrons &allpatrons, ItemCollection &allItems);
   void ListOverdueBooks();
   void ListBooksForPatron(int PatronID);
   void UpdateLoanStatus(int LoanID);
-  void RecheckBook(int LoanID, Patrons &allPatrons, Books &allBooks);
-  void ReportLost(int LoanID, Patrons &allPatrons, Books &allBooks);
+  void RecheckBook(int LoanID, Patrons &allPatrons, ItemCollection &allItems);
+  void ReportLost(int LoanID, Patrons &allPatrons, ItemCollection &allItems);
 
 private:
   vector<Loan> LoansList;

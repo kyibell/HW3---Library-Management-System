@@ -13,6 +13,8 @@ public:
   LibraryItem();
   LibraryItem(int itemID, double cost, char status, int loanPeriod);
 
+virtual ~LibraryItem(); //Virtual Deconstructor
+
 //Library Item Setters
   void SetItemID(int itemID);
   void SetCost(double cost);

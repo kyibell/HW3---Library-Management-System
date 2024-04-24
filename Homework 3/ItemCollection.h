@@ -10,6 +10,11 @@ using namespace std;
 
 class ItemCollection {
 public:
+
+ItemCollection();
+~ItemCollection();
+
+
   void AddItem(); 
   void DeleteItem(int itemID);
   void EditItem(int itemID);

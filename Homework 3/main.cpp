@@ -2,54 +2,56 @@
 #include <string>
 #include <vector>
 using namespace std;
+
 #include "Book.h"
-//#include "Books.h"
 #include "Loan.h"
 #include "Loans.h"
 #include "Patron.h"
 #include "Patrons.h"
+#include "LibraryItem.h"
+#include "ItemCollection.h"
 
 // Global Variables
 Patrons allPatrons;
-Books allBooks;
+ItemCollection allItems;
 Loans allLoans;
 
-void PrintBookMenu() { //Book Menu
+void PrintItemMenu() { //Item Menu
   char choice;
   do {
-    cout << "---------BOOK MANAGEMENT---------" << endl;
+    cout << "---------ITEM MANAGEMENT---------" << endl;
     cout << "What would you like to do?:" << endl;
-    cout << "1. Add Book" << endl;
-    cout << "2. Delete Book" << endl;
-    cout << "3. Edit Book" << endl;
-    cout << "4. Print All Books" << endl;
-    cout << "5. Print Specific Book" << endl;
+    cout << "1. Add Item" << endl;
+    cout << "2. Delete Item" << endl;
+    cout << "3. Edit Item" << endl;
+    cout << "4. Print All Items" << endl;
+    cout << "5. Print Specific Item" << endl;
     cout << "6. Return to Main Menu" << endl;
 
     cin >> choice;
 
     switch (choice) {
     case '1':
-      allBooks.AddBook();
+      allItems.AddItem();
       break;
     case '2':
-      int bookID;
-      cout << "Please enter the Book ID:" << endl;
-      cin >> bookID;
-      allBooks.DeleteBook(bookID);
+      int itemID;
+      cout << "Please enter the Item ID:" << endl;
+      cin >> itemID;
+      allItems.DeleteItem(itemID);
       break;
     case '3':
-      cout << "Please enter the Book ID:" << endl;
-      cin >> bookID;
-      allBooks.EditBook(bookID);
+      cout << "Please enter the Item ID:" << endl;
+      cin >> itemID;
+      allItems.EditItem(itemID);
       break;
     case '4':
-      allBooks.PrintAllBooks();
+      allItems.PrintAllItems();
       break;
     case '5':
-      cout << "Enter the Book ID:" << endl;
-      cin >> bookID;
-      allBooks.PrintSpecificBook(bookID);
+      cout << "Enter the Item ID:" << endl;
+      cin >> itemID;
+      allItems.PrintSpecificItem(itemID);
       break;
     }
 
@@ -110,32 +112,32 @@ void PrintLoanMenu() { //Loans Menu
   do {
     cout << "---------LOAN MANAGEMENT---------" << endl;
     cout << "What would you like to do?:" << endl;
-    cout << "1. Check Out Book" << endl;
-    cout << "2. Check In Book" << endl;
+    cout << "1. Check Out Item" << endl;
+    cout << "2. Check In Item" << endl;
     cout << "3. Check Due Dates" << endl;
-    cout << "4. List Overdue Books" << endl;
-    cout << "5. List Books for Patron" << endl;
+    cout << "4. List Overdue Items" << endl;
+    cout << "5. List Items for Patron" << endl;
     cout << "6. Update Loan Status" << endl;
-    cout << "7. Recheck Book" << endl;
-    cout << "8. Report Lost Book" << endl;
+    cout << "7. Recheck Item" << endl;
+    cout << "8. Report Lost Item" << endl;
     cout << "9. Return to Main Menu" << endl;
-    
+
     cin >> choice;
     cin.ignore();
-    
+
     switch (choice) {
     case '1':
       int LoanID;
-      cout << "Check Out Book" << endl;
+      cout << "Check Out Item" << endl;
       cout << "Please enter LoanID:" << endl;
       cin >> LoanID;
-      allLoans.CheckOutBook(LoanID, allPatrons, allBooks);
+      allLoans.CheckOutBook(LoanID, allPatrons, allItems);
       break;
     case '2':
-      cout << "Check In Book" << endl;
+      cout << "Check In Item" << endl;
       cout << "Please enter LoanID:" << endl;
       cin >> LoanID;
-      allLoans.CheckInBook(LoanID, allPatrons, allBooks);
+      allLoans.CheckInBook(LoanID, allPatrons, allItems);
 
       break;
     case '3':
@@ -144,11 +146,11 @@ void PrintLoanMenu() { //Loans Menu
       cout << "Due Dates Updated and Fines updated Sucessfully." << endl;
       break;
     case '4':
-      cout << "List Overdue Books" << endl;
+      cout << "List Overdue Items" << endl;
       allLoans.ListOverdueBooks();
       break;
     case '5':
-      cout << "List Books for Patron" << endl;
+      cout << "List Items for Patron" << endl;
       int PatronID;
       cout << "Please enter Patron ID:" << endl;
       cin >> PatronID;
@@ -161,16 +163,16 @@ void PrintLoanMenu() { //Loans Menu
       allLoans.UpdateLoanStatus(LoanID);
       break;
     case '7':
-      cout << "Recheck Book" << endl;
+      cout << "Recheck Item" << endl;
       cout << "Please enter LoanID:" << endl;
       cin >> LoanID;
-      allLoans.RecheckBook(LoanID, allPatrons, allBooks);
+      allLoans.RecheckBook(LoanID, allPatrons, allItems);
       break;
     case '8':
       cout << "Report Lost Book" << endl;
       cout << "Please enter LoanID:" << endl;
       cin >> LoanID;
-      allLoans.ReportLost(LoanID, allPatrons, allBooks);
+      allLoans.ReportLost(LoanID, allPatrons, allItems);
       break;
     case '9':
       break;
@@ -185,14 +187,14 @@ void PrintMainMenu() { //Main Menu
   do {
     cout << "---------LIBRARY MANAGEMENT SYSTEM---------" << endl;
     cout << "What would you like to do?:" << endl;
-    cout << "1. Book Management" << endl;
+    cout << "1. Item Management" << endl;
     cout << "2. Patron Management" << endl;
     cout << "3. Loan Management" << endl;
     cout << "4. Quit:" << endl;
     cin >> choice;
     switch (choice) {
     case '1':
-      PrintBookMenu();
+      PrintItemMenu();
       break;
     case '2':
       PrintPatronMenu();
@@ -201,6 +203,7 @@ void PrintMainMenu() { //Main Menu
       PrintLoanMenu();
       break;
     case '4':
+      cout << "Exiting Library Management System. Goodbye!" << endl;
       break;
     default:
       cout << "Invalid choice. Please try again." << endl;
@@ -210,11 +213,20 @@ void PrintMainMenu() { //Main Menu
 }
 
 int main() {
+
   char choice;
   do {
-    PrintMainMenu();
-    cin >> choice;
+
+    if (choice == '4') {
+      break;
+    }
+    else {
+      PrintMainMenu();
+      cin >> choice;
+    }
   } while (choice != '4');
+
+
 
   return 0;
 }

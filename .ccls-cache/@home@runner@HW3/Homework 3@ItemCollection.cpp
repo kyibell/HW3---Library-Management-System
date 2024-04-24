@@ -8,6 +8,14 @@ using namespace std;
 #include "DVD.h"
 #include "ItemCollection.h"
 
+ItemCollection::ItemCollection() {}
+
+ItemCollection::~ItemCollection() {
+  for (auto item : itemList) {
+    delete item;
+  }
+}
+
 void ItemCollection::AddItem() {
   int itemID;
   double cost;
@@ -25,7 +33,9 @@ void ItemCollection::AddItem() {
   cout << "What type of item are you adding? (1. Book, 2. CD, 3. DVD): "
        << endl;
   char choice;
+
   cin >> choice;
+  cin.ignore();
 
   switch (choice) {
   case '1': {
@@ -57,7 +67,7 @@ void ItemCollection::AddItem() {
     int numTracks;
     cout << "Please enter the CD's title :" << endl;
     getline(cin, cdTitle);
-    cin.ignore();
+    // cin.ignore();
     cout << "Please enter the CD's artist :" << endl;
     getline(cin, artist);
     cout << "Please enter the CD's release date :" << endl;
@@ -105,8 +115,9 @@ void ItemCollection::AddItem() {
 void ItemCollection::DeleteItem(int itemID) {
   for (auto it = itemList.begin(); it != itemList.end(); ++it) {
     if ((*it)->GetItemID() == itemID) {
-      //  delete *it;
+      delete *it;
       itemList.erase(it);
+      cout << "Item sucessfully deleted." << endl;
       break;
     } else {
       cout << "Item not found. Please try again." << endl;
@@ -122,7 +133,41 @@ void ItemCollection::EditItem(int itemID) {
   }
 }
 
-void ItemCollection::EditItemDetails(LibraryItem *item) {}
+void ItemCollection::EditItemDetails(LibraryItem *item) {
+  cout << "What would you like to edit?" << endl;
+  cout << "1. Item ID" << endl;
+  cout << "2. Cost" << endl;
+  cout << "3. Status" << endl;
+  cout << "4. Loan Period" << endl;
+  char choice;
+  cin >> choice;
+  switch (choice) {
+  case '1':
+    int newID;
+    cout << "Please enter the new item ID: " << endl;
+    cin >> newID;
+    item->SetItemID(newID);
+    break;
+  case '2':
+    double newCost;
+    cout << "Please enter the new cost: " << endl;
+    cin >> newCost;
+    item->SetCost(newCost);
+    break;
+  case '3':
+    char newStatus;
+    cout << "Please enter the new status: " << endl;
+    cin >> newStatus;
+    item->SetStatus(newStatus);
+    break;
+  case '4':
+    int newLoanPeriod;
+    cout << "Please enter the new loan period: " << endl;
+    cin >> newLoanPeriod;
+    item->SetLoanPeriod(newLoanPeriod);
+    break;
+  }
+}
 
 LibraryItem *ItemCollection::FindItem(int itemID) {
   for (int i = 0; i < itemList.size(); i++) {
@@ -138,7 +183,7 @@ LibraryItem *ItemCollection::FindItem(int itemID) {
 void ItemCollection::PrintAllItems() {
   cout << "ITEM COLLECTION:" << endl;
   for (int i = 0; i < itemList.size(); i++) {
-    cout << "Item ID: " << itemList.at(i)->GetItemID() << endl;
+    itemList.at(i)->PrintInfo();
   }
 }
 
@@ -147,5 +192,9 @@ void ItemCollection::PrintSpecificItem(int itemID) {
   if (foundItem->GetItemID() != 0) {
     cout << "ITEM DETAILS:" << endl;
     foundItem->PrintInfo();
+    cout << "Item ID: " << foundItem->GetItemID() << endl;
+    cout << "Status: " << foundItem->GetStatus() << endl;
+    cout << "Cost: " << foundItem->GetCost() << endl;
+    cout << "Loan Period: " << foundItem->GetLoanPeriod() << endl;
   }
 }

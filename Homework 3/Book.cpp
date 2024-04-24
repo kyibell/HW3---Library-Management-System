@@ -44,7 +44,5 @@ void Book::PrintInfo() const {
   cout << "Author: " << author << endl;
   cout << "ISBN: " << ISBN << endl;
   cout << "Category: " << category << endl;
-  cout << "Library ID: " << LibraryID << endl;
   cout << "Cost: " << cost << endl;
-  cout << "Status: " << status << endl;
 }

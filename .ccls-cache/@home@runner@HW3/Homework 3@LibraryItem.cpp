@@ -21,6 +21,11 @@ LibraryItem::LibraryItem(int itemID, double cost, char status, int loanPeriod) {
   this->loanPeriod = loanPeriod;
 }
 
+//Deconstructor
+
+LibraryItem::~LibraryItem() {}
+ 
+
 //Setters
 
 void LibraryItem::SetItemID(int itemID) { this->itemID = itemID; }

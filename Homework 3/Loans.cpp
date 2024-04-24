@@ -7,45 +7,45 @@ using namespace std;
 #include "Loan.h"
 #include "Loans.h"
 
-void Loans::CheckOutBook(int LoanID, Patrons &allpatrons, Books &allBooks) {
-  int PatronID, BookID;
+void Loans::CheckOutBook(int LoanID, Patrons &allpatrons, ItemCollection &allItems) {
+  int PatronID, itemID;
   cout << "Please enter the Patron's ID:" << endl;
   cin >> PatronID;
-  cout << "Please enter the Book's ID:" << endl;
-  cin >> BookID;
+  cout << "Please enter the Item's ID:" << endl;
+  cin >> itemID;
 
   Patron *foundpatron = allpatrons.FindPatron(PatronID);
-  Book *foundbook = allBooks.FindBook(BookID);
+  LibraryItem *founditem = allItems.FindItem(itemID);
 
-  Book &book = *foundbook;
+  LibraryItem &item = *founditem;
   Patron &patron = *foundpatron;
 
   if (patron.GetOutBooks() >= 6) {
-    cout << "Patron has reached the maximum number of books allowed." << endl;
+    cout << "Patron has reached the maximum number of items allowed." << endl;
   } else {
     time_t dueDate =
         time(0) + 10 * 24 * 60 * 60; // 10 days after the book is checked out
     patron.SetCheckedOutBooks(patron.GetOutBooks() +
                               1); // Increment the number of out books
-    book.SetStatus('O');          // Set Status to "Out"
-    Loan newLoan = Loan(LoanID, patron.GetIDNum(), book.GetLibraryID(), dueDate,
+    item.SetStatus('O');          // Set Status to "Out"
+    Loan newLoan = Loan(LoanID, patron.GetIDNum(), item.GetItemID(), dueDate,
                         'N');     // Create a new loan object
     LoansList.push_back(newLoan); // Add loan to LoansList
     cout << "Book checked out successfully." << endl;
   }
 }
 
-void Loans::CheckInBook(int LoanID, Patrons &allPatrons, Books &allBooks) {
-  int PatronID, BookID;
+void Loans::CheckInBook(int LoanID, Patrons &allPatrons, ItemCollection &allItems) {
+  int PatronID, itemID;
   cout << "Please enter the Patron's ID:" << endl;
   cin >> PatronID;
-  cout << "Please enter the Book's ID:" << endl;
-  cin >> BookID;
+  cout << "Please enter the Item's ID:" << endl;
+  cin >> itemID;
 
   Patron *foundpatron = allPatrons.FindPatron(PatronID);
-  Book *foundbook = allBooks.FindBook(BookID);
+  LibraryItem *founditem = allItems.FindItem(itemID);
 
-  Book &book = *foundbook; // Dereferenced Pointers
+  LibraryItem &item = *founditem; // Dereferenced Pointers
   Patron &patron = *foundpatron;
 
   for (int i = 0; i < LoansList.size(); i++) {
@@ -53,7 +53,7 @@ void Loans::CheckInBook(int LoanID, Patrons &allPatrons, Books &allBooks) {
       LoansList.erase(LoansList.begin() + i);
       patron.SetCheckedOutBooks(patron.GetOutBooks() -
                                 1); // Decrment the number of out books
-      book.SetStatus('I');          // Set Status to "In"
+      item.SetStatus('I');          // Set Status to "In"
       cout << "Book checked in successfully." << endl;
       break;
     } else {
@@ -118,16 +118,16 @@ void Loans::UpdateLoanStatus(int LoanID) {
     }
   }
 }
-void Loans::RecheckBook(int LoanID, Patrons &allPatrons, Books &allBooks) {
-  int PatronID, BookID;
+void Loans::RecheckBook(int LoanID, Patrons &allPatrons, ItemCollection &allItems) {
+  int PatronID, itemID;
   cout << "Please enter the Patron's ID:" << endl;
   cin >> PatronID;
-  cout << "Please enter the Book's ID:" << endl;
-  cin >> BookID;
+  cout << "Please enter the Item's ID:" << endl;
+  cin >> itemID;
   Patron *foundpatron = allPatrons.FindPatron(PatronID);
-  Book *foundbook = allBooks.FindBook(BookID);
+  LibraryItem *founditem = allItems.FindItem(itemID);
 
-  Book &book = *foundbook;
+  LibraryItem &item = *founditem;
   Patron &patron = *foundpatron;
 
   for (int i = 0; i < LoansList.size(); i++) {
@@ -147,26 +147,26 @@ void Loans::RecheckBook(int LoanID, Patrons &allPatrons, Books &allBooks) {
   }
 }
 
-void Loans::ReportLost(int LoanID, Patrons &allPatrons, Books &allBooks) {
-  int PatronID, BookID;
+void Loans::ReportLost(int LoanID, Patrons &allPatrons, ItemCollection &allItems) {
+  int PatronID, itemID;
   cout << "Please enter the Patron's ID:" << endl;
   cin >> PatronID;
-  cout << "Please enter the Book's ID:" << endl;
-  cin >> BookID;
+  cout << "Please enter the Item's ID:" << endl;
+  cin >> itemID;
 
   Patron *foundpatron = allPatrons.FindPatron(PatronID);
-  Book *foundbook = allBooks.FindBook(BookID);
+  LibraryItem *founditem = allItems.FindItem(itemID);
 
-  Book &book = *foundbook;
+  LibraryItem &item = *founditem;
   Patron &patron = *foundpatron;
 
   for (int i = 0; i < LoansList.size(); i++) {
     if (LoansList.at(i).GetLoanID() == LoanID) {
       LoansList.erase(LoansList.begin() + i);
-      book.SetStatus('L'); // Set status to "Lost"
+      item.SetStatus('L'); // Set status to "Lost"
       patron.SetFineBalance(
           patron.GetFineBalance() +
-          book.GetCost()); // Adds book cost to patron's fine balance
+          item.GetCost()); // Adds book cost to patron's fine balance
       break;
     }
   }
